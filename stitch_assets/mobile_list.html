@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://fonts.cdnfonts.com/s/93121/Geist-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://fonts.cdnfonts.com/s/93121/Geist-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://fonts.cdnfonts.com/s/93121/Geist-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flat-tactile-card {
+            background-color: #ffffff;
+            border: 1px solid #E5E7EB;
+            transition: border-color 0.2s ease, transform 0.1s ease;
+        }
+        .flat-tactile-card:active {
+            transform: scale(0.98);
+            border-color: #4f46e5;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#bf0f3c",
+                        "on-secondary-fixed-variant": "#005236",
+                        "secondary-container": "#6cf8bb",
+                        "outline": "#777587",
+                        "on-background": "#191c1d",
+                        "surface": "#f8f9fa",
+                        "primary-container": "#4f46e5",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-container": "#ffd0d2",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e8e9",
+                        "tertiary-fixed": "#ffdadb",
+                        "background": "#f8f9fa",
+                        "surface-variant": "#e1e3e4",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary": "#3525cd",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-container": "#00714d",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c7c4d8",
+                        "on-surface-variant": "#464555",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-container": "#edeeef",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary": "#006c49",
+                        "on-primary-container": "#dad7ff",
+                        "inverse-primary": "#c3c0ff",
+                        "tertiary": "#95002b",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-tertiary-fixed": "#40000d",
+                        "surface-dim": "#d9dadb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "40px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "container-max": "1280px",
+                        "sm": "8px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "display": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- Top AppBar (Sticky Header) -->
+<header class="bg-surface sticky top-0 z-50 border-b border-outline-variant flex items-center justify-between px-margin-mobile w-full h-16">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">NoteFlow</h1>
+<button class="bg-primary-container text-on-primary-container font-label-md px-4 py-2 rounded-xl flex items-center gap-2 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 600;">add</span>
+<span>New Note</span>
+</button>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile pt-lg">
+<!-- Search & Filters -->
+<section class="mb-lg space-y-md">
+<!-- Search Bar -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border border-outline-variant rounded-xl focus:outline-none focus:border-primary-container transition-colors font-body-md" placeholder="Search notes..." type="text"/>
+</div>
+<!-- Pill Selectors -->
+<div class="flex items-center gap-sm overflow-x-auto no-scrollbar">
+<button class="px-md py-2 rounded-full font-label-md bg-primary-container text-on-primary-container whitespace-nowrap">Recent</button>
+<button class="px-md py-2 rounded-full font-label-md bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors whitespace-nowrap">Created</button>
+<button class="px-md py-2 rounded-full font-label-md bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition-colors whitespace-nowrap">A-Z</button>
+</div>
+</section>
+<!-- Notes Feed -->
+<div class="flex flex-col gap-md">
+<!-- Card 1 (Pinned) -->
+<article class="flat-tactile-card rounded-xl p-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="flex justify-between items-start mb-base">
+<h2 class="font-label-md text-body-md font-bold text-on-surface leading-tight">Strategic Project Roadmap 2024</h2>
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<p class="font-body-sm text-on-surface-variant line-clamp-2 mb-md">This quarter we focusing on scaling the design system and integrating feedback loops from the engineering team...</p>
+<time class="font-label-sm text-outline">May 21</time>
+</article>
+<!-- Card 4 (Pinned) -->
+<article class="flat-tactile-card rounded-xl p-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="flex justify-between items-start mb-base">
+<h2 class="font-label-md text-body-md font-bold text-on-surface leading-tight">Ideas for the next app release</h2>
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<p class="font-body-sm text-on-surface-variant line-clamp-2 mb-md">Integrate AI-driven summarization for long meeting transcripts and add multi-device sync capabilities...</p>
+<time class="font-label-sm text-outline">May 18</time>
+</article>
+<!-- Card 2 -->
+<article class="flat-tactile-card rounded-xl p-md">
+<div class="flex justify-between items-start mb-base">
+<h2 class="font-label-md text-body-md font-bold text-on-surface leading-tight">Meeting Notes: Brand Refresh</h2>
+</div>
+<p class="font-body-sm text-on-surface-variant line-clamp-2 mb-md">The client preferred the indigo-focused palette. We need to present the new logo variants by next Tuesday...</p>
+<time class="font-label-sm text-outline">May 20</time>
+</article>
+<!-- Card 3 -->
+<article class="flat-tactile-card rounded-xl p-md">
+<div class="flex justify-between items-start mb-base">
+<h2 class="font-label-md text-body-md font-bold text-on-surface leading-tight">Grocery List &amp; Meal Prep</h2>
+</div>
+<p class="font-body-sm text-on-surface-variant line-clamp-2 mb-md">Kale, Quinoa, Salmon, Blueberries, Almond Milk. Check pantry for balsamic vinegar and olive oil...</p>
+<time class="font-label-sm text-outline">May 19</time>
+</article>
+</div>
+</main>
+<!-- Floating Action Button (Mobile Contextual) -->
+<button class="fixed bottom-24 right-4 w-14 h-14 bg-primary-container text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all duration-150 z-50">
+<span class="material-symbols-outlined" style="font-size: 28px;">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant flex justify-around items-center h-20 px-4">
+<!-- Notes (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-sm text-label-sm">Notes</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</a>
+<!-- Pinned -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined">push_pin</span>
+<span class="font-label-sm text-label-sm">Pinned</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for active filter pills
+        document.querySelectorAll('.flex.overflow-x-auto button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.flex.overflow-x-auto button').forEach(b => {
+                    b.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                button.classList.add('bg-primary-container', 'text-on-primary-container');
+                button.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

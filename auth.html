@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NoteFlow — Access your personal workspace. Sign in or sign up to secure and sync your notes.">
+  <title>NoteFlow — Sign In / Sign Up</title>
+  
+  <!-- Font and Icon Assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <h1 class="auth-card__title">NoteFlow</h1>
+        <p class="auth-card__subtitle" id="auth-subtitle">Welcome back! Please sign in to access your notes.</p>
+      </div>
+
+      <!-- Error and Success Alert Banners -->
+      <div class="alert alert--error" id="auth-error-alert" style="display: none;">
+        <span class="material-symbols-outlined alert__icon">error</span>
+        <span class="alert__message" id="auth-error-msg">Incorrect username or password.</span>
+      </div>
+
+      <div class="alert alert--success" id="auth-success-alert" style="display: none;">
+        <span class="material-symbols-outlined alert__icon">check_circle</span>
+        <span class="alert__message" id="auth-success-msg">Account created! Redirecting...</span>
+      </div>
+
+      <!-- Authentication Form -->
+      <form id="auth-form" novalidate>
+        
+        <!-- Full Name (Sign Up Only) -->
+        <div class="form-group" id="group-fullname" style="display: none;">
+          <label class="form-label" for="fullname">Full Name</label>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">person</span>
+            <input class="form-input" type="text" id="fullname" placeholder="John Doe" autocomplete="name">
+          </div>
+        </div>
+
+        <!-- Username (Sign Up Only) -->
+        <div class="form-group" id="group-username" style="display: none;">
+          <label class="form-label" for="username">Username</label>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">alternate_email</span>
+            <input class="form-input" type="text" id="username" placeholder="johndoe" autocomplete="username">
+          </div>
+          <span class="form-help">Must be at least 3 characters.</span>
+        </div>
+
+        <!-- Email (Common) -->
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">mail</span>
+            <input class="form-input" type="email" id="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <!-- Password (Common) -->
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">lock</span>
+            <input class="form-input" type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+            <button class="btn-toggle-password" type="button" tabindex="-1" title="Toggle password visibility">
+              <span class="material-symbols-outlined" id="toggle-pwd-icon">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn--primary btn--auth-submit" type="submit" id="auth-submit-btn">
+          <span class="btn-text">Sign In</span>
+          <div class="spinner" id="auth-spinner" style="display: none;"></div>
+        </button>
+      </form>
+
+      <!-- Toggle Mode Link -->
+      <div class="auth-card__footer">
+        <p class="toggle-mode-text" id="toggle-mode-container">
+          Need an account? <a href="#" id="toggle-mode-link">Sign Up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

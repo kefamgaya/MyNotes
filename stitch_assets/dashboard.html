@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NoteFlow - Personal Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        }
+        body {
+            font-family: 'Geist', sans-serif;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e1e3e4;
+            border-radius: 10px;
+        }
+        .flat-tactile-card {
+            transition: all 0.2s ease;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#777587",
+                      "primary-container": "#4f46e5",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e7e8e9",
+                      "tertiary-container": "#bf0f3c",
+                      "tertiary": "#95002b",
+                      "surface-dim": "#d9dadb",
+                      "primary": "#3525cd",
+                      "on-surface-variant": "#464555",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#e2dfff",
+                      "surface-container-highest": "#e1e3e4",
+                      "outline-variant": "#c7c4d8",
+                      "secondary-fixed": "#6ffbbe",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb2b7",
+                      "on-tertiary-container": "#ffd0d2",
+                      "surface-container": "#edeeef",
+                      "surface-tint": "#4d44e3",
+                      "on-secondary-fixed": "#002113",
+                      "secondary": "#006c49",
+                      "on-primary-container": "#dad7ff",
+                      "on-secondary-container": "#00714d",
+                      "on-primary-fixed": "#0f0069",
+                      "on-secondary-fixed-variant": "#005236",
+                      "on-surface": "#191c1d",
+                      "on-tertiary-fixed-variant": "#92002a",
+                      "inverse-surface": "#2e3132",
+                      "surface-bright": "#f8f9fa",
+                      "surface": "#f8f9fa",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f3f4f5",
+                      "inverse-on-surface": "#f0f1f2",
+                      "inverse-primary": "#c3c0ff",
+                      "secondary-container": "#6cf8bb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#191c1d",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "background": "#f8f9fa",
+                      "tertiary-fixed": "#ffdadb",
+                      "on-tertiary-fixed": "#40000d",
+                      "surface-variant": "#e1e3e4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "container-max": "1280px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "xl": "40px",
+                      "gutter": "24px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "display": ["Geist"],
+                      "label-md": ["Geist"],
+                      "body-md": ["Geist"],
+                      "label-sm": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "headline-lg": ["Geist"],
+                      "headline-lg-mobile": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "body-sm": ["Geist"]
+              },
+              "fontSize": {
+                      "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SIDEBAR (360px) -->
+<aside class="w-[360px] h-full flex flex-col flex-shrink-0 bg-surface-container-low border-r border-outline-variant">
+<!-- Header Section -->
+<div class="px-md py-md space-y-md">
+<div class="flex justify-between items-center">
+<span class="font-display text-headline-md font-bold text-primary">NoteFlow</span>
+<button class="bg-primary text-on-primary px-md py-sm rounded-lg flex items-center gap-sm font-label-md active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        New Note
+                    </button>
+</div>
+<!-- Search Input -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg pl-xl pr-sm py-sm font-body-md focus:outline-none focus:border-primary focus:ring-0 transition-colors" placeholder="Search notes..." type="text"/>
+</div>
+<!-- Sort Dropdown -->
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Recent Notes</span>
+<div class="relative inline-block text-left">
+<button class="flex items-center gap-xs font-label-sm text-on-surface-variant hover:text-primary transition-colors">
+                            Sort by: Last Edited
+                            <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Note List Container -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-sm space-y-sm pb-md">
+<!-- Active Card -->
+<div class="flat-tactile-card relative bg-surface-container-high border-l-4 border-primary rounded-lg p-md cursor-pointer group">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md font-semibold text-on-surface truncate pr-xl">Strategic Project Roadmap 2024</h3>
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<p class="text-on-surface-variant font-body-sm line-clamp-2 mb-sm">This quarter we focusing on scaling the design system and implementing tactile feedback across all mobile touchpoints...</p>
+<div class="flex items-center justify-between">
+<span class="bg-surface-container-highest text-on-surface-variant px-sm py-[2px] rounded text-[10px] font-semibold uppercase tracking-tighter">May 21</span>
+</div>
+</div>
+<!-- Inactive Cards -->
+<div class="flat-tactile-card bg-surface-container-lowest border border-outline-variant rounded-lg p-md cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md font-semibold text-on-surface truncate pr-xl">Meeting Notes: Brand Refresh</h3>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] opacity-0 group-hover:opacity-100">push_pin</span>
+</div>
+<p class="text-on-surface-variant font-body-sm line-clamp-2 mb-sm">The client preferred the indigo-focused palette. We need to ensure contrast ratios meet AAA standards for web accessibility...</p>
+<div class="flex items-center justify-between">
+<span class="bg-surface-container text-on-surface-variant px-sm py-[2px] rounded text-[10px] font-semibold uppercase tracking-tighter">May 20</span>
+</div>
+</div>
+<div class="flat-tactile-card bg-surface-container-lowest border border-outline-variant rounded-lg p-md cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md font-semibold text-on-surface truncate pr-xl">Grocery List &amp; Meal Prep</h3>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] opacity-0 group-hover:opacity-100">push_pin</span>
+</div>
+<p class="text-on-surface-variant font-body-sm line-clamp-2 mb-sm">Kale, Quinoa, Salmon, Blueberries, Almond Milk. Check inventory for olive oil before heading to the market tomorrow...</p>
+<div class="flex items-center justify-between">
+<span class="bg-surface-container text-on-surface-variant px-sm py-[2px] rounded text-[10px] font-semibold uppercase tracking-tighter">May 19</span>
+</div>
+</div>
+<div class="flat-tactile-card bg-surface-container-lowest border border-outline-variant rounded-lg p-md cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-label-md font-semibold text-on-surface truncate pr-xl">Ideas for the next app release</h3>
+<span class="material-symbols-outlined text-secondary text-[18px]" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+</div>
+<p class="text-on-surface-variant font-body-sm line-clamp-2 mb-sm">Integrate AI-driven summarization for long meeting transcripts. Dark mode toggle enhancements and better widget support...</p>
+<div class="flex items-center justify-between">
+<span class="bg-surface-container text-on-surface-variant px-sm py-[2px] rounded text-[10px] font-semibold uppercase tracking-tighter">May 18</span>
+</div>
+</div>
+</div>
+<!-- Footer for Sidebar -->
+<div class="p-md bg-surface-container-lowest border-t border-outline-variant flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-[12px]">JD</div>
+<div class="flex-1">
+<p class="font-label-sm text-on-surface leading-none">John Doe</p>
+<p class="font-label-sm text-on-surface-variant leading-none text-[10px]">Premium Workspace</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">settings</span>
+</div>
+</aside>
+<!-- MAIN EDITOR PANEL -->
+<main class="flex-1 flex flex-col bg-surface h-full">
+<!-- Top App Bar -->
+<header class="h-16 flex items-center justify-between px-lg border-b border-outline-variant bg-surface">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+<nav class="flex items-center gap-xs font-label-md text-on-surface-variant">
+<span>Personal</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Active Note</span>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-xs text-secondary hover:bg-secondary-container/20 px-sm py-[6px] rounded transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+<span class="font-label-sm">Pinned</span>
+</button>
+<div class="w-[1px] h-6 bg-outline-variant"></div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="text-tertiary hover:text-on-error-container transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Editor Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar flex flex-col items-center">
+<div class="w-full max-w-[800px] px-lg py-xl flex flex-col h-full">
+<!-- Image Placeholder for Context -->
+<div class="w-full h-64 rounded-xl overflow-hidden mb-xl border border-outline-variant">
+<img alt="Modern office setup" class="w-full h-full object-cover grayscale-[20%] contrast-[1.1]" data-alt="A cinematic, high-angle photograph of a pristine, minimalist creative workstation. The scene features a sleek aluminum laptop, a black Moleskine notebook, and a designer pen resting on a light grey concrete desk surface. Soft, directional morning light streams in from a nearby window, casting long, elegant shadows and highlighting the flat-tactile textures. The color story is dominated by cool neutrals, slate greys, and deep indigo accents, evoking a sense of calm professional focus and modern productivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBAOF53o4t77aPWocFPvo7pJ9uva1QLF9fX2h5yxsZNPfmAHyJTBWvQsLhcpSt1tVXIwR5zE0IPFhUMZ2yWSMYE7DCXVESDmdgsOnG-djSPctN6fj8gOUfZEXX1lwlkGcoPCH1HAy46wGbthHny3FXIcgMNLUVhXCdVxjWzm8all2nfst9vKlds3Sg5eXWPj6Qm6cTo49dS2j8F69DFrLaMIFCenVNDLj9pSLNfLVGLpsLkULwlHFiqyCPo6rlv_o7ULXPcOT-Smg"/>
+</div>
+<!-- Note Title -->
+<input class="w-full font-display text-headline-lg border-none focus:ring-0 px-0 bg-transparent placeholder:text-outline-variant text-on-surface mb-md" placeholder="Untitled Note" type="text" value="Strategic Project Roadmap 2024"/>
+<div class="flex gap-sm mb-lg">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-sm py-xs rounded text-[12px] font-semibold">#strategy</span>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded text-[12px] font-semibold">#design-system</span>
+<span class="bg-surface-container-high text-on-surface-variant px-sm py-xs rounded text-[12px] font-semibold">+ Add tag</span>
+</div>
+<!-- Note Content -->
+<textarea class="flex-1 w-full font-body-lg text-on-surface border-none focus:ring-0 px-0 bg-transparent resize-none leading-[1.6] placeholder:text-outline-variant" placeholder="Start writing your note here...">This quarter we are focusing on scaling the design system and implementing tactile feedback across all mobile touchpoints.
+
+Key Objectives:
+1. Complete the audit of existing UI components (36 total).
+2. Establish the "Flat-Tactile" design language as the primary standard.
+3. Optimize performance for low-end devices by 15%.
+
+The transition to Indigo as our primary brand color has been received positively by beta testers. We should look into expanding the tertiary palette to include some warmer tones for warning states, but keep the overall 'Focused Calm' aesthetic.
+
+Drafting the next sprint cycle now...</textarea>
+</div>
+</div>
+<!-- Footer Bar -->
+<footer class="h-10 bg-surface-container-lowest border-t border-outline-variant px-lg flex justify-between items-center text-secondary font-label-sm">
+<div class="flex items-center gap-md">
+<span>Last saved: Today at 10:45 AM</span>
+<span class="text-outline-variant">|</span>
+<span>524 words</span>
+</div>
+<div class="flex items-center gap-lg">
+<button class="hover:text-primary transition-colors">Help</button>
+<button class="hover:text-primary transition-colors">Shortcuts</button>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[14px]">cloud_done</span>
+<span>Synced</span>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Floating Action Button (FAB) - For context but visible only on smaller viewports or for quick actions -->
+<div class="fixed bottom-xl right-xl hidden md:flex">
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[32px]">edit</span>
+</button>
+</div>
+<script>
+        // Simple interaction for the note list selection
+        const cards = document.querySelectorAll('.flat-tactile-card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => {
+                    c.classList.remove('border-l-4', 'border-primary', 'bg-surface-container-high');
+                    c.classList.add('border', 'border-outline-variant', 'bg-surface-container-lowest');
+                });
+                card.classList.remove('border', 'border-outline-variant', 'bg-surface-container-lowest');
+                card.classList.add('border-l-4', 'border-primary', 'bg-surface-container-high');
+            });
+        });
+    </script>
+</body></html>
