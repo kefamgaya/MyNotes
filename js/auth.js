@@ -32,11 +32,32 @@ const togglePwdIcon = document.getElementById('toggle-pwd-icon');
 // Page State (default to 'signin')
 let currentMode = 'signin'; 
 
-// Check if user is already authenticated
-async function checkActiveSession() {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (session) {
-    window.location.href = 'index.html';
+// Show auth screen, reset states, clear any alerts and hide the loading screen
+export function showAuthScreen() {
+  if (authForm) {
+    authForm.reset();
+  }
+  clearAlerts();
+  
+  // If Mode is SignUp, toggle back to SignIn as default
+  if (currentMode === 'signup') {
+    // Call toggleMode with no event argument
+    toggleMode();
+  }
+  
+  // Reveal the login form container
+  const authContainer = document.querySelector('.auth-container');
+  const splashScreen = document.getElementById('app-splash-screen');
+  
+  if (authContainer) {
+    authContainer.style.setProperty('display', 'flex', 'important');
+  }
+  
+  if (splashScreen) {
+    splashScreen.classList.add('splash-screen--fade-out');
+    setTimeout(() => {
+      splashScreen.remove();
+    }, 400);
   }
 }
 
@@ -168,7 +189,7 @@ async function handleSubmit(e) {
       
       showSuccess('Success! Redirecting to workspace...');
       setTimeout(() => {
-        window.location.href = 'index.html';
+        window.location.hash = '#/';
       }, 1000);
       
     } else {
@@ -192,7 +213,7 @@ async function handleSubmit(e) {
       if (data.session) {
         showSuccess('Account created! Redirecting to workspace...');
         setTimeout(() => {
-          window.location.href = 'index.html';
+          window.location.hash = '#/';
         }, 1000);
       } else {
         // Email confirmation required — reset button state first, then toggle to sign in
@@ -208,10 +229,8 @@ async function handleSubmit(e) {
   }
 }
 
-// Listeners
-document.addEventListener('DOMContentLoaded', () => {
-  checkActiveSession();
-  
+// Initialize authentication listeners once
+export function initAuth() {
   if (toggleModeLink) {
     toggleModeLink.addEventListener('click', toggleMode);
   }
@@ -223,4 +242,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (authForm) {
     authForm.addEventListener('submit', handleSubmit);
   }
-});
+}

@@ -1,5 +1,11 @@
 /* auth.css */
 
+body {
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--on-surface);
+}
+
 .auth-container {
   display: flex;
   align-items: center;

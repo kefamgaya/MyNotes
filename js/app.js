@@ -7,6 +7,7 @@ import { searchNotes } from './search.js';
 import { sortNotes } from './sort.js';
 import { initDragAndDrop } from './drag.js';
 import { debounce } from './utils.js';
+import { initAuth, showAuthScreen } from './auth.js';
 
 // Application State
 let notes = [];
@@ -214,7 +215,7 @@ function getProcessedNotes() {
 // Sign out trigger
 async function handleSignOut() {
   await supabase.auth.signOut();
-  window.location.href = 'auth.html';
+  window.location.hash = '#/auth';
 }
 
 // Setup Event Listeners
@@ -394,60 +395,122 @@ function setupEventListeners() {
   }
 }
 
-// App Initialization
-document.addEventListener('DOMContentLoaded', async () => {
-  // Check user authentication
+// Central SPA Hash Routing logic
+let isAppInitialized = false;
+
+async function handleRoute() {
+  const hash = window.location.hash || '#/';
+  
   const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
-    window.location.href = 'auth.html';
-    return;
+  
+  const appContainer = document.querySelector('.app-container');
+  const authContainer = document.querySelector('.auth-container');
+  
+  if (hash === '#/auth') {
+    // Auth route
+    if (session) {
+      // Already authenticated -> redirect to dashboard
+      window.location.hash = '#/';
+      return;
+    }
+    
+    // Hide dashboard, show auth container
+    if (appContainer) {
+      appContainer.style.setProperty('display', 'none', 'important');
+    }
+    showAuthScreen();
+  } else {
+    // Notes board / dashboard route
+    if (!session) {
+      // Unauthenticated -> redirect to auth
+      window.location.hash = '#/auth';
+      return;
+    }
+    
+    currentUser = session.user;
+    
+    // Hide auth screen, show dashboard
+    if (authContainer) {
+      authContainer.style.setProperty('display', 'none', 'important');
+    }
+    
+    // Initialize Dashboard UI once (if not already done)
+    if (!isAppInitialized) {
+      isAppInitialized = true;
+      
+      // Sync sort and theme settings from database on success
+      await store.syncPreferencesFromDatabase();
+
+      // Load local state
+      currentSort = store.getSortPreference();
+      
+      // Load notes from Supabase
+      notes = await store.getAllNotes();
+
+      // Load and apply user theme preference
+      const savedTheme = store.getThemePreference();
+      applyTheme(savedTheme);
+
+      // Setup UI elements and logic routes
+      ui.initUI({
+        onNoteClick: handleNoteClick,
+        onNotePin: handleNotePin,
+        onNoteDelete: handleNoteDelete,
+        onNoteChange: handleNoteChange,
+        onThemeChange: handleThemeChange,
+        onExportBackup: handleExportBackup,
+        onImportBackup: handleImportBackup,
+        onResetWorkspace: handleResetWorkspace,
+        onSignOut: handleSignOut
+      });
+
+      // Render the beautiful profile info and Sign Out in the sidebar footer
+      ui.renderSidebarFooter(currentUser, () => {
+        activeNoteId = '__settings__';
+        renderSettingsView();
+        ui.renderNoteList(getProcessedNotes(), activeNoteId);
+        ui.setMobileView(true);
+      }, handleSignOut);
+
+      setupEventListeners();
+      
+      // Register storage warning feedback
+      store.registerStorageErrorListener((error) => {
+        ui.showToast('Database write failed! Please check your connection.');
+      });
+    } else {
+      // On returning navigation, fetch latest notes array from store
+      notes = await store.getAllNotes();
+    }
+    
+    // Render initial notes list and clear active editor view
+    const processed = getProcessedNotes();
+    ui.renderNoteList(processed, activeNoteId);
+    ui.renderEditor(null);
+    
+    // Reveal dashboard smoothly and hide loading splash screen
+    if (appContainer) {
+      appContainer.style.setProperty('display', 'flex', 'important');
+    }
+    
+    const splashScreen = document.getElementById('app-splash-screen');
+    if (splashScreen) {
+      splashScreen.classList.add('splash-screen--fade-out');
+      setTimeout(() => {
+        splashScreen.remove();
+      }, 400);
+    }
   }
+}
+
+// App Initialization
+document.addEventListener('DOMContentLoaded', () => {
+  // Setup Authentication event handlers
+  initAuth();
   
-  currentUser = session.user;
-
-  // Sync sort and theme settings from database on success
-  await store.syncPreferencesFromDatabase();
-
-  // Load local state
-  currentSort = store.getSortPreference();
+  // Execute routing check
+  handleRoute();
   
-  // Load notes from Supabase
-  notes = await store.getAllNotes();
-
-  // Load and apply user theme preference
-  const savedTheme = store.getThemePreference();
-  applyTheme(savedTheme);
-
-  // Setup UI elements and logic routes
-  ui.initUI({
-    onNoteClick: handleNoteClick,
-    onNotePin: handleNotePin,
-    onNoteDelete: handleNoteDelete,
-    onNoteChange: handleNoteChange,
-    onThemeChange: handleThemeChange,
-    onExportBackup: handleExportBackup,
-    onImportBackup: handleImportBackup,
-    onResetWorkspace: handleResetWorkspace,
-    onSignOut: handleSignOut
-  });
-
-  // Render the beautiful profile info and Sign Out in the sidebar footer
-  ui.renderSidebarFooter(currentUser, () => {
-    activeNoteId = '__settings__';
-    renderSettingsView();
-    ui.renderNoteList(getProcessedNotes(), activeNoteId);
-    ui.setMobileView(true);
-  }, handleSignOut);
-
-  setupEventListeners();
-  
-  // Register storage warning feedback
-  store.registerStorageErrorListener((error) => {
-    ui.showToast('Database write failed! Please check your connection.');
-  });
-
-  // Render initial view
-  const processed = getProcessedNotes();
-  ui.renderNoteList(processed, activeNoteId);
-  ui.renderEditor(null); // Initially show empty screen in editor
+  // Attach router to hashchange events
+  window.addEventListener('hashchange', handleRoute);
 });
